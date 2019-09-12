@@ -1,4 +1,6 @@
 import random
+
+
 #This function pulls words from a text file and selects a random word
 def load_word():
     f = open('words.txt', 'r')
@@ -8,6 +10,8 @@ def load_word():
     words_list = words_list[0].split(' ') 
     secret_word = random.choice(words_list)
     return secret_word
+
+
 #This function will check if all the letters of the word have been guessed
 def is_word_guessed(secret_word, letters_guessed):
     counter = 0
@@ -19,6 +23,8 @@ def is_word_guessed(secret_word, letters_guessed):
         return True
     else:
         return False
+
+
 #This function will display either underscores or correctly guessed letters in their respective places to the user in the terminal
 def get_guessed_word(secret_word, letters_guessed):
     #Thank you Alex Gray for helping me out with this function. My method was too complicated and he helped me simplify it.
@@ -31,6 +37,7 @@ def get_guessed_word(secret_word, letters_guessed):
             display += " _ "
     return display
 
+
 #This function checks is a guessed letter is in a word
 def is_guess_in_word(guess, secret_word):
     if guess in secret_word:
@@ -41,15 +48,14 @@ def is_guess_in_word(guess, secret_word):
 
 #This function is what controls the flow of the game
 def spaceman(secret_word):
-    print("Welcome to the Spaceman Game! You have been chosen a random word that you must guess using one letter at a time!")
     letters_guessed = []
     count = 7
+    print("Welcome to the Spaceman Game! You have been chosen a random word that you must guess using one letter at a time!")
 #guess tracking and correctness
     while count > 0 and is_word_guessed(secret_word, letters_guessed) == False:
         guess = input ("Guess a letter please: ")
         print("You have " + str(count) + " guesses left.") 
         letters_guessed.append(guess)
-        
         correct = is_guess_in_word(guess, secret_word)
         try:
             if correct:
