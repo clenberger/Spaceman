@@ -1,5 +1,5 @@
 import random
-
+#This function pulls words from a text file and selects a random word
 def load_word():
     f = open('words.txt', 'r')
     words_list = f.readlines()
@@ -8,7 +8,7 @@ def load_word():
     words_list = words_list[0].split(' ') 
     secret_word = random.choice(words_list)
     return secret_word
-
+#This function will check if all the letters of the word have been guessed
 def is_word_guessed(secret_word, letters_guessed):
     counter = 0
     for i in secret_word:
@@ -19,7 +19,7 @@ def is_word_guessed(secret_word, letters_guessed):
         return True
     else:
         return False
-
+#This function will display either underscores or correctly guessed letters in their respective places to the user in the terminal
 def get_guessed_word(secret_word, letters_guessed):
     #Thank you Alex Gray for helping me out with this function. My method was too complicated and he helped me simplify it.
     display = " "
@@ -31,11 +31,7 @@ def get_guessed_word(secret_word, letters_guessed):
             display += " _ "
     return display
 
-    #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
-
-
-
-
+#This function checks is a guessed letter is in a word
 def is_guess_in_word(guess, secret_word):
     if guess in secret_word:
         return True
@@ -43,7 +39,7 @@ def is_guess_in_word(guess, secret_word):
         return False
 
 
-
+#This function is what controls the flow of the game
 def spaceman(secret_word):
     print("Welcome to the Spaceman Game! You have been chosen a random word that you must guess using one letter at a time!")
     letters_guessed = []
@@ -59,7 +55,7 @@ def spaceman(secret_word):
             if correct:
                 print ("Good job!")
             else:
-                print ("Better luck next time! Guess again")
+                print ("Oof so close! Guess again")
                 count -= 1
         finally: 
             print(get_guessed_word(secret_word, letters_guessed))
@@ -74,6 +70,6 @@ def spaceman(secret_word):
 
 
 
-#These function calls that will start the game
+#These function calls will start the game
 secret_word = load_word()
 spaceman(secret_word)
