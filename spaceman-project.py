@@ -1,4 +1,5 @@
 import random
+import unittest
 
 
 #This function pulls words from a text file and selects a random word
@@ -28,7 +29,7 @@ def is_word_guessed(secret_word, letters_guessed):
 #This function will display either underscores or correctly guessed letters in their respective places to the user in the terminal
 def get_guessed_word(secret_word, letters_guessed):
     #Thank you Alex Gray for helping me out with this function. My method was too complicated and he helped me simplify it.
-    display = " "
+    display = ""
 
     for i in secret_word:
         if i in letters_guessed:
@@ -75,7 +76,19 @@ def spaceman(secret_word):
 
 
 
-
 #These function calls will start the game
 secret_word = load_word()
 spaceman(secret_word)
+
+class spaceman_Tests(unittest.TestCase):
+    def test_is_word_guessed(self):
+        self.assertEqual(is_word_guessed('dog','god'), True)
+
+    def test_get_guessed_word(self):
+        self.assertEqual(get_guessed_word('dog', 'god'), 'dog')
+
+    def test_is_guess_in_word(self):
+        self.assertEqual(is_guess_in_word('apple', 'l'), False)
+
+
+unittest.main()
